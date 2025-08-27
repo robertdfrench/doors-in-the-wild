@@ -21,13 +21,21 @@ $(CLONE):
 pull: $(CLONE) #: Pull the latest illumos code
 	git -C $(SRC) pull origin master
 
+.PHONY: next
+next: build/remaining.txt #: Next uncovered file
+	@head -n1 $<
+
 .PHONY: index
 index: build/index.txt #: Rebuild the index file
+
+.PHONY: progress
+progress: build/index.txt build/remaining.txt #: How much has been covered
+	@wc -l $^ \
+		| awk '{ l[NR]=$$1 }; END { print(1.0 - l[2]/l[1])*100"%" }'
 
 build/index.txt: build/.dir $(MASTER)
 	rg -ls -e door $(SRC) \
 		| sed 's,^$(SRC)/,,' > $@
-	wc -l $@
 
 build/coverage.txt: build/.dir $(NOTES)
 	rg --no-line-number --no-filename '^\.Pa' notes \
@@ -38,7 +46,6 @@ build/%.sorted: build/%.txt
 
 build/remaining.txt: build/index.sorted build/coverage.sorted
 	comm -23 $^ > $@
-	wc -l $@
 
 build/.dir:
 	mkdir -p build
