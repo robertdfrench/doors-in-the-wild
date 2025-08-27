@@ -2,6 +2,7 @@ ORIGIN=https://github.com/illumos/illumos-gate.git
 SRC=../illumos-gate
 CLONE=../illumos-gate/.git/description
 MASTER=$(SRC)/.git/refs/heads/master
+NOTES=$(wildcard notes/*.md)
 
 .PHONY: help
 help: #: Display this help menu
@@ -24,7 +25,19 @@ pull: $(CLONE) #: Pull the latest illumos code
 index: build/index.txt #: Rebuild the index file
 
 build/index.txt: build/.dir $(MASTER)
-	rg -ls -e door $(SRC) > $@
+	rg -ls -e door $(SRC) \
+		| sed 's,^$(SRC)/,,' > $@
+	wc -l $@
+
+build/coverage.txt: build/.dir $(NOTES)
+	rg --no-line-number --no-filename '^\.Pa' notes \
+		| cut -d' ' -f2 > $@
+
+build/%.sorted: build/%.txt
+	sort $< > $@
+
+build/remaining.txt: build/index.sorted build/coverage.sorted
+	comm -23 $^ > $@
 	wc -l $@
 
 build/.dir:
