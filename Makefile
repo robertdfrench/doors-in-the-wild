@@ -2,7 +2,7 @@ ORIGIN=https://github.com/illumos/illumos-gate.git
 SRC=../illumos-gate
 CLONE=../illumos-gate/.git/description
 MASTER=$(SRC)/.git/refs/heads/master
-NOTES:=$(wildcard notes/*.md)
+NOTES:=$(wildcard content/docs/*.md)
 
 .PHONY: help
 help: #: Display this help menu
