@@ -3,7 +3,6 @@ default:
 
 variables:
   GIT_SUBMODULE_STRATEGY: recursive
-  THEME_URL: "github.com/adityatelange/hugo-PaperMod"
 
 test:  # builds and tests your site
   script:
