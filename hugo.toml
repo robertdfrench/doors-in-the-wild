@@ -1,4 +1,4 @@
 baseURL = 'https://doors-in-the-wild-92621e.gitlab.io'
 languageCode = 'en-us'
 title = 'Doors in the Wild'
-theme = "ananke"
+theme = "hugo-book"
