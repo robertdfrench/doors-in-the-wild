@@ -2,7 +2,9 @@
 
 ```mdoc
 .Pa usr/src/cmd/auditd/doorway.c
-.Pa /usr/src/cmd/auditd/auditd.c
+.Pa usr/src/cmd/auditd/auditd.c
+.Pa usr/src/cmd/auditd/Makefile
+.Pa usr/src/cmd/auditrecord/audit_record_attr.txt
 ```
 
 Static doorfd descriptor set to -1 at compile time, so that the command startw
@@ -45,3 +47,10 @@ and `auditd_thread_init` in `doorway.c`.
 
 The `input` server procedure in `doorway.c` has a comment stating that it is not
 reentrant.
+
+The `doorway.c` translation unit is compiled separately, so all the door stuff
+is in one spot.
+
+Door syscalls are themselves auditable. Some are labelled "Not used." but many
+others are present and contain useful metadata. For example,
+`AUE_DOORFS_DOOR_CALL` contains the door id for the *owning* process.
