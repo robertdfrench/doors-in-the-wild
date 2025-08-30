@@ -1,11 +1,9 @@
 # AuditD
 
-```mdoc
-.Pa usr/src/cmd/auditd/doorway.c
-.Pa usr/src/cmd/auditd/auditd.c
-.Pa usr/src/cmd/auditd/Makefile
-.Pa usr/src/cmd/auditrecord/audit_record_attr.txt
-```
+* [`usr/src/cmd/auditd/doorway.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/auditd/doorway.c)
+* [`usr/src/cmd/auditd/auditd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/auditd/auditd.c)
+* [`usr/src/cmd/auditd/Makefile`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/auditd/Makefile)
+* [`usr/src/cmd/auditrecord/audit_record_attr.txt`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/auditrecord/audit_record_attr.txt)
 
 Static doorfd descriptor set to -1 at compile time, so that the command startw
 with an invalid door descriptor (that is presumably reset on first failure)

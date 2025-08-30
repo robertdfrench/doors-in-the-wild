@@ -1,12 +1,10 @@
 # ipmgmt
 
-```mdoc
-.Pa usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_door.c
-.Pa usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_impl.h
-.Pa usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_main.c
-.Pa usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_persist.c
-.Pa usr/src/cmd/cmd-inet/lib/ipmgmtd/Makefile
-```
+* [`usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_door.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_door.c)
+* [`usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_impl.h)
+* [`usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_main.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_main.c)
+* [`usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_persist.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_persist.c)
+* [`usr/src/cmd/cmd-inet/lib/ipmgmtd/Makefile`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/ipmgmtd/Makefile)
 
 `libipadm.co` acts as a door client that calls into ipmgmtd.
 

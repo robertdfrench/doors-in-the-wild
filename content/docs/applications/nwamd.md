@@ -1,15 +1,13 @@
 # Net Config Daemon / Network Auto-Magic Daemon
 
-```mdoc
-.Pa usr/src/cmd/cmd-inet/lib/netcfgd/netcfgd.c
-.Pa usr/src/cmd/cmd-inet/lib/nwamd/door_if.c
-.Pa usr/src/cmd/cmd-inet/lib/nwamd/events.h
-.Pa usr/src/cmd/cmd-inet/lib/nwamd/main.c
-.Pa usr/src/cmd/cmd-inet/lib/nwamd/Makefile
-.Pa usr/src/cmd/cmd-inet/lib/nwamd/objects.h
-.Pa usr/src/cmd/cmd-inet/lib/nwamd/README
-.Pa usr/src/cmd/cmd-inet/lib/nwamd/util.h
-```
+* [`usr/src/cmd/cmd-inet/lib/netcfgd/netcfgd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/netcfgd/netcfgd.c)
+* [`usr/src/cmd/cmd-inet/lib/nwamd/door_if.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/door_if.c)
+* [`usr/src/cmd/cmd-inet/lib/nwamd/events.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/events.h)
+* [`usr/src/cmd/cmd-inet/lib/nwamd/main.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/main.c)
+* [`usr/src/cmd/cmd-inet/lib/nwamd/Makefile`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/Makefile)
+* [`usr/src/cmd/cmd-inet/lib/nwamd/objects.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/objects.h)
+* [`usr/src/cmd/cmd-inet/lib/nwamd/README`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/README)
+* [`usr/src/cmd/cmd-inet/lib/nwamd/util.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/util.h)
 
 ## Notes
 Initialization of the daemon creates a door that `libnwam` calls can use.

@@ -1,10 +1,8 @@
 # IKED
 
-```mdoc
-.Pa usr/src/cmd/cmd-inet/usr.sbin/ipsecutils/ikeadm.c
-.Pa usr/src/lib/libipsecutil/common/ipsec_util.c
-.Pa usr/src/lib/libipsecutil/common/ikedoor.h
-```
+* [`usr/src/cmd/cmd-inet/usr.sbin/ipsecutils/ikeadm.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/usr.sbin/ipsecutils/ikeadm.c)
+* [`usr/src/lib/libipsecutil/common/ipsec_util.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/lib/libipsecutil/common/ipsec_util.c)
+* [`usr/src/lib/libipsecutil/common/ikedoor.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/lib/libipsecutil/common/ikedoor.h)
 
 ## Notes
 Awareness of doors for debugging information. Alongside other application state,

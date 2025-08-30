@@ -1,4 +1,6 @@
-ORIGIN=https://github.com/illumos/illumos-gate.git
+PROJECT=https://github.com/illumos/illumos-gate
+BLOB_URL=$(PROJECT)/blob/master
+ORIGIN=$(PROJECT).git
 SRC=../illumos-gate
 CLONE=../illumos-gate/.git/description
 MASTER=$(SRC)/.git/refs/heads/master
@@ -33,13 +35,20 @@ progress: build/index.txt build/remaining.txt #: How much has been covered
 	@wc -l $^ \
 		| awk '{ l[NR]=$$1 }; END { print(1.0 - l[2]/l[1])*100"%" }'
 
+.PHONY: pathfix
+pathfix: #: Adjust all .Pa paths to be markdown links
+	find content -type f -name "*.md" \
+		| sed 's/\.md$$/.pathfix/' \
+		| xargs make
+
 build/index.txt: build/.dir $(MASTER)
 	rg -ls -e door $(SRC) \
 		| sed 's,^$(SRC)/,,' > $@
 
 build/coverage.txt: build/.dir $(NOTES)
-	rg --no-line-number --no-filename '^\.Pa' content/docs \
-		| cut -d' ' -f2 > $@
+	rg --no-line-number --no-filename '^\* \[`' content/ \
+		| sed 's/^\* \[`//' \
+		| sed 's/`\].*//' > $@
 
 build/%.sorted: build/%.txt
 	sort $< > $@
@@ -50,6 +59,12 @@ build/remaining.txt: build/index.sorted build/coverage.sorted
 build/.dir:
 	mkdir -p build
 	touch $@
+
+%.pathfix: %.md
+	$(eval TMP := $(shell mktemp))
+	cat $< \
+		| awk -f bin/pathfix.awk -v blob_url="$(BLOB_URL)" > $(TMP)
+	mv $(TMP) $<
 
 .PHONY: clean
 clean: #: Clean up Local Work
