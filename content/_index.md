@@ -1,7 +1,7 @@
 ---
 title: "Doors in the Wild"
 ---
-![arrest](/MorrisonJim.jpg)
+![arrest](MorrisonJim.jpg)
 *An annotated survey of naturally occuring door clients, server
 procedures, calling conventions of the same, error handling practices,
 various idiosyncrasies, and interesting counter-examples drawn
