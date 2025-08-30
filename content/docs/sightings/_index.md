@@ -1,5 +1,5 @@
 ---
-title: "Applications"
+title: "Sightings"
 weight: 2
 ---
 ![arrest63](../../JimMorrisonMugShot1963.jpg)

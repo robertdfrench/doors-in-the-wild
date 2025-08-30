@@ -4,7 +4,7 @@ ORIGIN=$(PROJECT).git
 SRC=../illumos-gate
 CLONE=../illumos-gate/.git/description
 MASTER=$(SRC)/.git/refs/heads/master
-NOTES:=$(wildcard content/docs/*.md)
+NOTES:=$(shell find content -type f -name "*.md")
 
 .PHONY: help
 help: #: Display this help menu
