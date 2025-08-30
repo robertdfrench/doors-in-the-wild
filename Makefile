@@ -38,7 +38,7 @@ build/index.txt: build/.dir $(MASTER)
 		| sed 's,^$(SRC)/,,' > $@
 
 build/coverage.txt: build/.dir $(NOTES)
-	rg --no-line-number --no-filename '^\.Pa' notes \
+	rg --no-line-number --no-filename '^\.Pa' content/docs \
 		| cut -d' ' -f2 > $@
 
 build/%.sorted: build/%.txt
