@@ -21,3 +21,6 @@ the `bart(8)` command checks whether a path is a door.
 * [`usr/src/cmd/diff/diff.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/diff/diff.c)
 `diff(1)` must be able to complain about being told to compare a
 door to a text file, or vice versa.
+
+* [`usr/src/cmd/find/find.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/find/find.c)
+`find(1)` must be able to determine whether a file is a door. 
