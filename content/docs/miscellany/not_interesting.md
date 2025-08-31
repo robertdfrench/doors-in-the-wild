@@ -18,6 +18,6 @@ old `libdoor.so.1` library.
 * [`usr/src/cmd/bart/create.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/bart/create.c)
 the `bart(8)` command checks whether a path is a door.
 
-* [`usr/src/cmd/devfsadm/devfsadm_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/devfsadm/devfsadm_impl.h)
+* [`usr/src/cmd/diff/diff.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/diff/diff.c)
 `diff(1)` must be able to complain about being told to compare a
 door to a text file, or vice versa.
