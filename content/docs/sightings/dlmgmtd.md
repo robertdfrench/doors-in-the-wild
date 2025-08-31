@@ -2,6 +2,7 @@
 
 * [`usr/src/cmd/dlmgmtd/dlmgmt_db.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_db.c)
 * [`usr/src/cmd/dlmgmtd/dlmgmt_door.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_door.c)
+* [`usr/src/cmd/dlmgmtd/dlmgmt_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_impl.h)
 
 First, a comment about deadlocks:
 
