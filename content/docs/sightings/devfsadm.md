@@ -3,6 +3,7 @@
 * [`usr/src/cmd/devfsadm/devfsadm_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/devfsadm/devfsadm_impl.h)
 * [`usr/src/cmd/devfsadm/devfsadm.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/devfsadm/devfsadm.c)
 * [`usr/src/cmd/devfsadm/devfsadm.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/devfsadm/devfsadm.h)
+* [`usr/src/cmd/devfsadm/message.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/devfsadm/message.h)
 
 Based on the header, looks like there will be two server procedures:
 
@@ -126,3 +127,6 @@ done:
 	(void) door_return((char *)&res, sizeof (struct sdev_door_res),
 	    NULL, 0);
 ```
+
+The `message.h` header ctains a bunch of error macros, one of which is for
+complaining about not being able to create an event door.
