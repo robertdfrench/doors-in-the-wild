@@ -1,7 +1,7 @@
 # `DLMGMTD(8)`
 
 * [`usr/src/cmd/dlmgmtd/dlmgmt_db.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_db.c)
-* .Pa usr/src/cmd/dlmgmtd/dlmgmt_door.c
+* [`usr/src/cmd/dlmgmtd/dlmgmt_door.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_door.c)
 
 First, a comment about deadlocks:
 
