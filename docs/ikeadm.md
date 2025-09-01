@@ -1,4 +1,5 @@
-# IKED
+# [`IKEADM(8)`](https://www.illumos.org/man/8/ikeadm)
+*manipulate Internet Key Exchange (IKE) parameters and state*
 
 * [`usr/src/cmd/cmd-inet/usr.sbin/ipsecutils/ikeadm.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/usr.sbin/ipsecutils/ikeadm.c)
 * [`usr/src/lib/libipsecutil/common/ipsec_util.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/lib/libipsecutil/common/ipsec_util.c)
