@@ -83,7 +83,7 @@ serve: .venv/ready #: Serve the mkdocs website
 
 
 build: .venv/ready #: Build the website
-	$(venv) mkdocs build
+	$(venv) mkdocs build -d public
 
 .PHONY: build
 
