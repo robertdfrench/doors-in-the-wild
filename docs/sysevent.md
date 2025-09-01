@@ -1,4 +1,6 @@
-# `SYSEVENTD(8)`
+# [`SYSEVENTD(8)`](https://illumos.org/man/8/syseventd)
+*The kernel System Event notification Daemon*
+
 * .Ny usr/src/lib/libsysevent/libsysevent.c
 
 There are **two** (2) consecutive calls to `door_return` at the bottom of the

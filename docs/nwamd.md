@@ -1,4 +1,5 @@
-# Net Config Daemon / Network Auto-Magic Daemon
+# [`nwamd(8)`](https://illumos.org/man/8/nwamd)
+*The Network Auto-Magic Daemon*
 
 * [`usr/src/cmd/cmd-inet/lib/netcfgd/netcfgd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/netcfgd/netcfgd.c)
 * [`usr/src/cmd/cmd-inet/lib/nwamd/door_if.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/nwamd/door_if.c)

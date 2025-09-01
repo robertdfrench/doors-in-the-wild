@@ -1,4 +1,5 @@
-# `DLMGMTD(8)`
+# [`DLMGMTD(8)`](https://illumos.org/man/8/dlmgmtd)
+*The Datalink Management Daemon*
 
 * [`usr/src/cmd/dlmgmtd/dlmgmt_db.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_db.c)
 * [`usr/src/cmd/dlmgmtd/dlmgmt_door.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_door.c)

@@ -1,4 +1,5 @@
-# AuditD
+# [`AUDITD(8)`](https://www.illumos.org/man/8/auditd)
+*The Audit Daemon*
 
 * [`usr/src/cmd/auditd/doorway.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/auditd/doorway.c)
 * [`usr/src/cmd/auditd/auditd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/auditd/auditd.c)

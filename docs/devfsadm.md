@@ -1,4 +1,5 @@
-# `DEVFSADM(8)` - administration command for /dev
+# [`DEVFSADM(8)`](https://illumos.org/man/8/devfsadm)
+*An administration command for /dev*
 
 * [`usr/src/cmd/devfsadm/devfsadm_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/devfsadm/devfsadm_impl.h)
 * [`usr/src/cmd/devfsadm/devfsadm.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/devfsadm/devfsadm.c)
