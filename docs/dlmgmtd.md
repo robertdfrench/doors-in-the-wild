@@ -119,5 +119,11 @@ Of course, we see the warning about not mixing `malloc` and
 
 The [Static File Descriptor](static_file_descriptor.md) pattern is used,
 and mentions some conflict about putting the handle in the
-libdladm code. Interestingly, there is a global `dld_handle`
-variable which 
+libdladm code. The `dlmgmt_door_fd` variable seems to be the one in play.
+
+`dlmgmt_door_fini` is an idempotent cleanup function, though it doesn't attempt
+to remove any door paths from the filesystem.
+
+`dlmgmt_door_attach` attaches a door *inside of another zone* which is pretty
+cool. It also tries to `fdetach` the existing door path first in case a previous
+`dlmgmtd` exited uncleanly.
