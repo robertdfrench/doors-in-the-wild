@@ -14,8 +14,7 @@ What role does `attr_root` play? It is used in constructing a path to the
 `door_file` in the `daemon_update` function, seems like it is just a root
 working directory for this daemon.
 
-The [Static File Descriptor]({{< ref
-"docs/tradecraft/static_file_descriptor.md" >}}) pattern is in use here,
+The [Static File Descriptor](static_file_descriptor.md) pattern is in use here,
 together with a filesystem path variable called `lookup_door_path`. This pattern
 is so common, I wonder why there isn't a struct like:
 
@@ -108,7 +107,7 @@ nonzeo:
 	}
 ```
 
-The [Switching Table]({{<ref "docs/tradecraft/switching_table.md" >}}) here (a
+The [Switching Table](switching_table.md) here (a
 `case` statement) only contains one entry. Looks like more were anticipated but
 never materialized. If a client calls the door with a payload that doesn't
 specify this command, the `default` case will run and the response payload will

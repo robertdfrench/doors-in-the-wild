@@ -1,22 +1,13 @@
 default:
-  image: "hugomods/hugo:exts"
-
-variables:
-  GIT_SUBMODULE_STRATEGY: recursive
-
-test:  # builds and tests your site
-  script:
-    - hugo
-  rules:
-    - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
+  image: "python:3.12.11-trixie"
 
 create-pages:  # a user-defined job that builds your pages and saves them to the specified path.
   script:
-    - hugo
+    - make build
   pages: true  # specifies that this is a Pages job
   artifacts:
     paths:
-      - public
+      - site
   rules:
     - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
   environment: production

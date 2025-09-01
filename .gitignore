@@ -1,3 +1,5 @@
 build/*
 public/*
 resources/_gen/*
+site/*
+.venv/*

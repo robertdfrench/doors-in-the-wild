@@ -6,8 +6,7 @@ title: "WPA Supplicant"
 * [`usr/src/cmd/cmd-inet/usr.lib/wpad/wpa_supplicant.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/usr.lib/wpad/wpa_supplicant.c)
 * [`usr/src/cmd/cmd-inet/usr.lib/wpad/eloop.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/usr.lib/wpad/eloop.c)
 
-Uses the [Static File Descriptor]({{< ref
-"docs/tradecraft/static_file_descriptor.md" >}}) pattern.
+Uses the [Static File Descriptor](static_file_descriptor.md) pattern.
 
 The `wpa_supplicant_door_destroy` function logs a message if a door fails to be
 revoked or detached. Not all door servers do this.

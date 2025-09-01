@@ -1,7 +1,7 @@
 # Payload Polymorphism
 Sometimes a single server procedure will accept more than one data structure as
-input. This is often the case when a [Switching Table]({{<ref
-"docs/tradecraft/switching_table.md" >}}) is used.
+input. This is often the case when a [Switching
+Table](switching_table.md) is used.
 
 The server procedure will check a "header" field within the payload, to
 determine what "type" the payload is, or at least which handler should accept

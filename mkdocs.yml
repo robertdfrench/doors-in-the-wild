@@ -1,0 +1,22 @@
+site_name: Doors in the Wild
+theme: readthedocs
+nav:
+  - Home: README.md
+  - Tradecraft:
+    - Linting: linting.md
+    - Static File Descriptors: static_file_descriptor.md
+    - Payload Polymorphism: payload_polymorphism.md
+    - Switching Tables: switching_table.md
+  - Sightings:
+    - auditd: auditd.md
+    - bridged: bridged.md
+    - devfsadm: devfsadm.md
+    - dlmgmtd: dlmgmtd.md
+    - iked: iked.md
+    - ipmgmt: ipmgmt.md
+    - nwamd: nwamd.md
+    - sysevent: sysevent.md
+    - WPA Supplicant: wpa_supplicant.md
+  - Miscellany:
+    - Interesting: interesting.md
+    - Not Interesting: not_interesting.md

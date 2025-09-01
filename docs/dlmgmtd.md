@@ -21,28 +21,31 @@ First, a comment about deadlocks:
 
 Door clients can be either userland or kernel.
 
-This door server has to be aware of zones, because links can be created in one
-zone but assigned to another for use. The goal is for door clients to be
-restricted to viewing information about links associated with their zone, and
-restricted to modifying information about links created in their zone.
+This door server has to be aware of zones, because links can be
+created in one zone but assigned to another for use. The goal is
+for door clients to be restricted to viewing information about
+links associated with their zone, and restricted to modifying
+information about links created in their zone.
 
-The handler struct (for building out the [Switching Table]({{<ref
-"docs/tradecraft/switching_table.md" >}})) specifices that each handler takes a
-`zoneid_t` struct so it can meet these goals.
+The handler struct (for building out the [Switching
+Table](switching_table.md)
+specifices that each handler takes a `zoneid_t` struct so it can
+meet these goals.
 
-door clients have to have multiple privileges in order to work with links:
+door clients have to have multiple privileges in order to work
+with links:
 
 * `PRIV_SYS_IPTUN_CONFIG`
 * `PRIV_SYS_DL_CONFIG`
 * `PRIV_SYS_NET_CONFIG`
 
-There is a common AVL tree containing link information, called `dlmgmt_id_avl`.
-Write access to this tree has to be protected by a lock by calling
-`dlmgmt_table_lock`.
+There is a common AVL tree containing link information, called
+`dlmgmt_id_avl`.  Write access to this tree has to be protected
+by a lock by calling `dlmgmt_table_lock`.
 
-[Payload Polymorphism]({{<ref "docs/tradecraft/payload_polymorphism.md" >}}) is
-used, and of course no serialization or deserialization is done. However, some
-properties of the payload are validated after casting:
+[Payload Polymorphism](payload_polymorphism.md) is used, and of
+course no serialization or deserialization is done. However,
+some properties of the payload are validated after casting:
 
 ```c
 static void
@@ -59,15 +62,16 @@ dlmgmt_remapid(void *argp, void *retp, size_t *sz, zoneid_t zoneid,
 	}
 ```
 
-To support poylmorphism, the switching talbe specifies the size of the expected
-input and return types for each handler.
+To support poylmorphism, the switching talbe specifies the size
+of the expected input and return types for each handler.
 
-Also of interest is that each handler seems to have its own separate lock for
-the data structues that it affects (which makes sense). This allows the door
-server to handle unrelated calls concurrently.
+Also of interest is that each handler seems to have its own
+separate lock for the data structues that it affects (which
+makes sense). This allows the door server to handle unrelated
+calls concurrently.
 
-Always a good idea to free a credential object after use, since this memory is
-allocated by the call to `door_ucred`:
+Always a good idea to free a credential object after use, since
+this memory is allocated by the call to `door_ucred`:
 
 ```c
 	ucred_t			*cred = NULL;
@@ -84,9 +88,10 @@ done:
 		ucred_free(cred);
 ```
 
-If any handler returns the `ENOSPC` error, it gets invoked again, but this time
-the desired `acksz` is specified by the handler, and `alloca` will hook us up
-with the reight amount of space:
+If any handler returns the `ENOSPC` error, it gets invoked
+again, but this time the desired `acksz` is specified by the
+handler, and `alloca` will hook us up with the reight amount of
+space:
 
 ```c
 again:
@@ -104,8 +109,14 @@ again:
 	}
 ```
 
-Of course, we see the warning about not mixing `malloc` and `door_return`:
+Of course, we see the warning about not mixing `malloc` and
+`door_return`:
 
 > Note that malloc() cannot be used here because `door_return`
 > never returns, and memory allocated by malloc() would get leaked.
 > Use alloca() instead.
+
+The [Static File Descriptor](static_file_descriptor.md) pattern is used,
+and mentions some conflict about putting the handle in the
+libdladm code. Interestingly, there is a global `dld_handle`
+variable which 

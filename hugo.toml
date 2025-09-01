@@ -1,4 +1,0 @@
-baseURL = 'https://rfrench4.gitlab.io/doors-in-the-wild'
-languageCode = 'en-us'
-title = 'Doors in the Wild'
-theme = "hugo-book"

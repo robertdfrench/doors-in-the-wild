@@ -68,8 +68,34 @@ build/.dir:
 
 .PHONY: clean
 clean: #: Clean up Local Work
-	rm -rf build
+	rm -rf build .venv site
 
 .PHONY: clean_all
 clean_all: clean #: Remove Source Code as Well
 	rm -rf $(SRC)
+
+venv=. .venv/bin/activate &&
+
+serve: .venv/ready #: Serve the mkdocs website
+	$(venv) mkdocs serve
+
+.PHONY: serve
+
+
+build: .venv/ready #: Build the website
+	$(venv) mkdocs build
+
+.PHONY: build
+
+
+.venv/ready: requirements.txt .venv/latest-pip
+	$(venv) pip install -r $<
+	touch $@
+
+.venv/latest-pip: .venv/empty
+	$(venv) pip install --upgrade pip
+	touch $@
+
+.venv/empty:
+	python3 -m venv .venv
+	touch $@
