@@ -4,20 +4,24 @@
 * [`usr/src/cmd/dlmgmtd/dlmgmt_db.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_db.c)
 * [`usr/src/cmd/dlmgmtd/dlmgmt_door.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_door.c)
 * [`usr/src/cmd/dlmgmtd/dlmgmt_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_impl.h)
+* [`usr/src/cmd/dlmgmtd/dlmgmt_main.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/dlmgmt_main.c)
+* [`usr/src/cmd/dlmgmtd/Makefile`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/dlmgmtd/Makefile)
 
 First, a comment about deadlocks:
 
 > Because of the upcall architecture of dlmgmtd this can lead to deadlock
 > with the following scenario:
->    a) the thread preparing to fork will have acquired the malloc locks
->       then attempt to suspend every thread in preparation to fork.
->    b) all of the upcalls will be blocked in `door_ucred()` trying to malloc()
->       and get the credentials of their caller.
+>    a) the thread preparing to fork will have acquired the
+>    malloc locks then attempt to suspend every thread in
+>    preparation to fork.
+>    b) all of the upcalls will be blocked in `door_ucred()`
+>    trying to malloc() and get the credentials of their caller.
 >    c) we can't suspend the in-kernel thread making the upcall.
 >
-> Thus, we cannot serve door requests because we're blocked in malloc()
-> which fork() owns, but fork() is in turn blocked on the in-kernel thread
-> making the door upcall.  **This is a fundamental architectural problem with
+> Thus, we cannot serve door requests because we're blocked in
+> malloc() which fork() owns, but fork() is in turn blocked on
+> the in-kernel thread making the door upcall.  **This is a
+> fundamental architectural problem with
 > any server handling upcalls and also trying to fork()**.
 
 Door clients can be either userland or kernel.
@@ -114,16 +118,24 @@ Of course, we see the warning about not mixing `malloc` and
 `door_return`:
 
 > Note that malloc() cannot be used here because `door_return`
-> never returns, and memory allocated by malloc() would get leaked.
-> Use alloca() instead.
+> never returns, and memory allocated by malloc() would get
+> leaked.  Use alloca() instead.
 
-The [Static File Descriptor](static_file_descriptor.md) pattern is used,
-and mentions some conflict about putting the handle in the
-libdladm code. The `dlmgmt_door_fd` variable seems to be the one in play.
+The [Static File Descriptor](static_file_descriptor.md) pattern
+is used, and mentions some conflict about putting the handle in
+the libdladm code. The `dlmgmt_door_fd` variable seems to be the
+one in play.
 
-`dlmgmt_door_fini` is an idempotent cleanup function, though it doesn't attempt
-to remove any door paths from the filesystem.
+`dlmgmt_door_fini` is an idempotent cleanup function, though it
+doesn't attempt to remove any door paths from the filesystem.
 
-`dlmgmt_door_attach` attaches a door *inside of another zone* which is pretty
-cool. It also tries to `fdetach` the existing door path first in case a previous
-`dlmgmtd` exited uncleanly.
+`dlmgmt_door_attach` attaches a door *inside of another zone*
+which is pretty cool. It also tries to `fdetach` the existing
+door path first in case a previous `dlmgmtd` exited uncleanly.
+
+Sometimes the "door file" is called the "door rendezvous file".
+
+You can use `zone_getattr` to get the root directory for a zone,
+and then prepend this to the "door rendezvous file" in order to
+make a door available inside a zone (assuming we are doing this
+from the gz?)
