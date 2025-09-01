@@ -4,7 +4,7 @@ ORIGIN=$(PROJECT).git
 SRC=../illumos-gate
 CLONE=../illumos-gate/.git/description
 MASTER=$(SRC)/.git/refs/heads/master
-NOTES:=$(shell find content -type f -name "*.md")
+NOTES:=$(shell find docs -type f -name "*.md")
 
 .PHONY: help
 help: #: Display this help menu
@@ -37,7 +37,7 @@ progress: build/index.txt build/remaining.txt #: How much has been covered
 
 .PHONY: pathfix
 pathfix: #: Adjust all .Pa paths to be markdown links
-	find content -type f -name "*.md" \
+	find docs -type f -name "*.md" \
 		| sed 's/\.md$$/.pathfix/' \
 		| xargs make
 
@@ -46,7 +46,7 @@ build/index.txt: build/.dir $(MASTER)
 		| sed 's,^$(SRC)/,,' > $@
 
 build/coverage.txt: build/.dir $(NOTES)
-	rg --no-line-number --no-filename '^\* \[`' content/ \
+	rg --no-line-number --no-filename '^\* \[`' docs/ \
 		| sed 's/^\* \[`//' \
 		| sed 's/`\].*//' > $@
 

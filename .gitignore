@@ -3,3 +3,4 @@ public/*
 resources/_gen/*
 site/*
 .venv/*
+.DS_Store
