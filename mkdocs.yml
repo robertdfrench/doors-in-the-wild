@@ -12,6 +12,7 @@ nav:
     - bridged: bridged.md
     - devfsadm: devfsadm.md
     - dlmgmtd: dlmgmtd.md
+    - drd: drd.md
     - ikeadm: ikeadm.md
     - ipmgmt: ipmgmt.md
     - nwamd: nwamd.md
