@@ -1,7 +1,5 @@
----
-title: "WPA Supplicant"
----
-# WPA Supplicant
+# [`WPAD(8)`](https://illumos.org/man/8/wpad)
+*WPA and WPA2 protocol daemon*
 
 * [`usr/src/cmd/cmd-inet/usr.lib/wpad/wpa_supplicant.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/usr.lib/wpad/wpa_supplicant.c)
 * [`usr/src/cmd/cmd-inet/usr.lib/wpad/eloop.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/usr.lib/wpad/eloop.c)
