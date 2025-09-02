@@ -13,6 +13,8 @@
 * [`usr/src/cmd/fm/fmd/common/fmd_thread.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fm/fmd/common/fmd_thread.h)
 * [`usr/src/cmd/fm/fmd/common/fmd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fm/fmd/common/fmd.c)
 * [`usr/src/cmd/fm/fmd/common/fmd.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fm/fmd/common/fmd.h)
+* [`usr/src/cmd/fm/modules/common/ext-event-transport/fmevt_inbound.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fm/modules/common/ext-event-transport/fmevt_inbound.c)
+* [`usr/src/cmd/fm/modules/common/sw-diag-response/common/sw_main_cmn.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fm/modules/common/sw-diag-response/common/sw_main_cmn.c)
 
 ## Custom thread pools
 
@@ -77,6 +79,20 @@ or not, and if so, what thread pool it belongs to. Case in point, lots of logic
 in `fmd_thread.c` checks for boolean `is_door` flags to treat thread creation /
 destruction differently for door threads. This allows common thread creation
 logic, such as in `fmd_thread_create_cmn`.
+
+This comment from `sw_main_cmn.c` is a good reminder that, while some logic in a
+door server might appear to be single threaded, door threads share our address
+space and may want to access some of our data structures (this, we should use
+locks judiciously):
+
+```c
+	/*
+	 * Look for a slot.  Module entry points are single-threaded
+	 * in nature, but if someone installs a timer from a door
+	 * service function we're contended.
+	 */
+	(void) pthread_mutex_lock(&msinfo->swms_timerlock);
+```
 
 ## Module statistics
 Because this is an API for other code (fmd modules) to use, it exposes custom
