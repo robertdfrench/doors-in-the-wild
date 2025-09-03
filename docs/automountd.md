@@ -2,6 +2,7 @@
 
 * [`usr/src/cmd/fs.d/autofs/autod_main.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_main.c)
 * [`usr/src/cmd/fs.d/autofs/autod_mount.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_mount.c)
+* [`usr/src/cmd/fs.d/autofs/automount.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/automount.h)
 
 `autofs_doorfunc` is the server procedure.
 
@@ -49,7 +50,8 @@ Mentions of `door_ki_open`.
 
 Attaches the door to a filesystem path ONLY if the `DEBUG` macro is true.
 
-The `did_fork_exec` and `did_exec_map` doors have to be revoked separately.
+The `did_fork_exec` and `did_exec_map` doors have to be revoked separately. The
+follow the [Static File Descriptor](static_file_descriptor.md) pattern.
 
 The encoding and decoding functions take "lambdas" to deal with (perhaps) more
 specific type-based encoding rules. Observe that `encode_res` and `decode_args`
@@ -145,3 +147,4 @@ Again, we see that the authors anticipate failure from `door_return`:
 ```
 
 ## `automountd_do_exec_map`
+
