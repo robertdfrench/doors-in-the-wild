@@ -1,6 +1,6 @@
 # [`AUTOMOUNTD(8)`](https://illumos.org/man/8/automountd)
 
-* [`vim`](https://github.com/illumos/illumos-gate/blob/master/vim)
+* [`usr/src/cmd/fs.d/autofs/autod_main.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_main.c)
 
 `autofs_doorfunc` is the server procedure.
 
