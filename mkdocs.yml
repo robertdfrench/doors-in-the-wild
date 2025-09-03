@@ -10,6 +10,7 @@ nav:
     - Switching Tables: switching_table.md
   - Sightings:
     - auditd: auditd.md
+    - automountd: automountd.md
     - bridged: bridged.md
     - devfsadm: devfsadm.md
     - dlmgmtd: dlmgmtd.md
