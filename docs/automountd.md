@@ -1,6 +1,7 @@
 # [`AUTOMOUNTD(8)`](https://illumos.org/man/8/automountd)
 
 * [`usr/src/cmd/fs.d/autofs/autod_main.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_main.c)
+* [`usr/src/cmd/fs.d/autofs/autod_mount.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_mount.c)
 
 `autofs_doorfunc` is the server procedure.
 
@@ -12,8 +13,8 @@ Hardcoded `AUTOFS_DOOR` path.
 Automount handlers can be different programs, so server procedures need to be
 able to fork and/or exec. See the following server procedures:
 
-* `automountd_do_fork_exec`
-* `automountd_do_exec_map`
+* [`automountd_do_fork_exec`](#automountd_do_fork_exec)
+* [`automountd_do_exec_map`](#automountd_do_exec_map)
 
 A warning about forking and door threads:
 
@@ -110,3 +111,37 @@ and
 		 * kernel expected bufsize.
          */
 ```
+
+## `automountd_do_fork_exec`
+Door cookie is unused, as are door desriptors.
+
+Payload size enforcement is handled by casting the door payload to a local
+`command_t` struct and then comparing the size of the command struct to the
+`arg_size` provided to the server procedure:
+
+```c
+	command = (command_t *)argp;
+	if (sizeof (*command) != arg_size) {
+		res = EINVAL;
+		door_return((char *)&res, sizeof (res), NULL, 0);
+	}
+```
+
+This server procedure forks and then the child executes (via
+[`execv(2)`](https://www.illumos.org/man/2/execv)) a command string provided in
+the `command` struct.
+
+The child's stdin and stdout is attached either to `/dev/console` or `dev/null`
+based on flags in the `command` struct. The parent waits for the child to
+finish, and then calls `door_return` with the child's exit status.
+
+Again, we see that the authors anticipate failure from `door_return`:
+
+```c
+	door_return((char *)&res, sizeof (res), NULL, 0);
+	trace_prt(1, "automountd_do_fork_exec, door return failed %s, %s\n",
+	    command->file, strerror(errno));
+	door_return(NULL, 0, NULL, 0);
+```
+
+## `automountd_do_exec_map`
