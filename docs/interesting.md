@@ -12,6 +12,12 @@ in the FreeBSD implementation of bhyve.
 * [`usr/src/cmd/bhyve/common/pci_xhci.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/bhyve/common/pci_xhci.c)
 Same as above.
 
+* [`usr/src/contrib/bhyve/dev/nvme/nvme.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/contrib/bhyve/dev/nvme/nvme.h)
+Same as above.
+
+* [`usr/src/contrib/bhyve/dev/usb/controller/xhcireg.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/contrib/bhyve/dev/usb/controller/xhcireg.h)
+Same as above.
+
 * [`usr/src/cmd/bnu/Devices`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/bnu/Devices)
 `bnu` devices mention something called a "garage/door" but this
 seems to be in the context of serial modems.
