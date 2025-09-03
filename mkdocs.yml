@@ -3,9 +3,10 @@ theme: readthedocs
 nav:
   - Home: README.md
   - Tradecraft:
+    - Access Conrol: dbac.md
     - Linting: linting.md
-    - Static File Descriptors: static_file_descriptor.md
     - Payload Polymorphism: payload_polymorphism.md
+    - Static File Descriptors: static_file_descriptor.md
     - Switching Tables: switching_table.md
   - Sightings:
     - auditd: auditd.md
