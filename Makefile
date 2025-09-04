@@ -31,9 +31,16 @@ next: build/remaining.txt #: Next uncovered file
 index: build/index.txt #: Rebuild the index file
 
 .PHONY: progress
-progress: build/index.txt build/remaining.txt #: How much has been covered
+progress: build/progress.txt #: How much has been covered
+	cat $<
+	cat README.md \
+		| awk -f bin/progress.awk -v progress=`cat $<` \
+		> README.md
+
+build/progress.txt: build/index.txt build/remaining.txt
 	@wc -l $^ \
-		| awk '{ l[NR]=$$1 }; END { print(1.0 - l[2]/l[1])*100"%" }'
+		| awk '{ l[NR]=$$1 }; END { print(1.0 - l[2]/l[1])*100"%" }' \
+		> $@
 
 .PHONY: pathfix
 pathfix: #: Adjust all .Pa paths to be markdown links

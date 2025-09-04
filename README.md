@@ -1,6 +1,10 @@
 # Doors in the Wild
 *A nice and accurate survey of every door in illumos-gate*
 
+```progress
+7.36127%% Complete
+```
+
 The **Tradecraft** section describes common door techniques
 *observed* in illumos-gate. It is not a set of recommendations;
 it describes merely what is, not necessarily what *should be*.
