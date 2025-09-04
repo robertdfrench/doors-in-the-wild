@@ -21,5 +21,5 @@ $1 == "```" && fence == 1 {
 }
 
 fence == 1 {
-    print progress"% Complete"
+    print progress,"Complete"
 }
