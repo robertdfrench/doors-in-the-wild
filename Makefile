@@ -39,7 +39,7 @@ progress: build/progress.txt #: How much has been covered
 
 build/progress.txt: build/index.txt build/remaining.txt
 	@wc -l $^ \
-		| awk '{ l[NR]=$$1 }; END { print(1.0 - l[2]/l[1])*100"%" }' \
+		| awk '{ l[NR]=$$1 }; END { printf("%02.2f%%\n", (1.0 - l[2]/l[1])*100) }' \
 		> $@
 
 .PHONY: pathfix
