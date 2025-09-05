@@ -3,6 +3,7 @@
 * [`usr/src/cmd/fs.d/autofs/autod_main.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_main.c)
 * [`usr/src/cmd/fs.d/autofs/autod_mount.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_mount.c)
 * [`usr/src/cmd/fs.d/autofs/automount.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/automount.h)
+* [`usr/src/cmd/fs.d/autofs/ns_files.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/ns_files.c)
 
 `autofs_doorfunc` is the server procedure.
 
@@ -147,4 +148,25 @@ Again, we see that the authors anticipate failure from `door_return`:
 ```
 
 ## `automountd_do_exec_map`
+This function exists in `usr/src/cmd/fs.d/autofs/ns_files.c`. Same payload size
+enforcement strategy as above, no additional validation. It will call
+`read_execout` with the door arguments as an exec-style (shell command) payload.
 
+The `read_execout` function describes itself as "A simpler, multithreaded
+implementation of `popen()`". It reds the output of the subcommand into a buffer
+provided by the server procedure, which is returned to the door client on
+success.
+
+YET AGAIN, we see logic that expects `door_return` to fail:
+```c
+	if (rc != 0) {
+		door_return((char *)&rc, sizeof (rc), NULL, 0);
+	} else {
+		door_return((char *)line, LINESZ, NULL, 0);
+	}
+
+    /* how does this even happen */
+	trace_prt(1, "automountd_do_exec_map, door return failed %s, %s\n",
+	    command->file, strerror(errno));
+	door_return(NULL, 0, NULL, 0);
+```
