@@ -4,6 +4,7 @@
 * [`usr/src/cmd/fs.d/autofs/autod_mount.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/autod_mount.c)
 * [`usr/src/cmd/fs.d/autofs/automount.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/automount.h)
 * [`usr/src/cmd/fs.d/autofs/ns_files.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/autofs/ns_files.c)
+* [`usr/src/cmd/fs.d/nfs/lib/nfs_resolve.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/lib/nfs_resolve.c)
 
 `autofs_doorfunc` is the server procedure.
 
