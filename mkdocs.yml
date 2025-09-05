@@ -4,6 +4,7 @@ nav:
   - Home: README.md
   - Tradecraft:
     - Access Conrol: dbac.md
+    - Door Return Failure: door_return_failure.md
     - Linting: linting.md
     - Payload Polymorphism: payload_polymorphism.md
     - Static File Descriptors: static_file_descriptor.md
