@@ -4,6 +4,7 @@
 * [`usr/src/cmd/fs.d/nfs/mountd/mountd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/mountd/mountd.c)
 * [`usr/src/cmd/fs.d/nfs/mountd/mountd.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/mountd/mountd.h)
 * [`usr/src/cmd/fs.d/nfs/mountd/nfs_cmd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/mountd/nfs_cmd.c)
+* .Pa usr/src/cmd/fs.d/nfs/mountd/nfsauth.c
 
 
 The `_nfssys` call can be used to pass door descriptors into the kernel (likely
@@ -79,3 +80,57 @@ originally invoked from a server procedure)?
 
 Seems kindof common in `nfs_cmd.c` to pass the descriptors around even as
 arguments to functions that do not use them.
+
+
+## `nfsauth_func`
+This is a server procedure in `nfsauth.c`. Uses the "double return" pattern
+where a `door_return` with a payload is expected to fail, but a `door_return`
+with no payload is expected to succeed?
+
+```c
+
+out:
+	(void) door_return((char *)rbuf, rbsz, NULL, 0);
+	(void) door_return(NULL, 0, NULL, 0);
+	/* NOTREACHED */
+```
+
+It uses `xdrmem_create` to decode the incoming door data, writes an error to
+syslog if the data can't be decoded, and then uses `xdrmem_create` again to
+*encode* the result.
+
+The logic at the bottom of this function is crazy. There are goto labels that
+occur inside an if statement, so that goto has a sortof "branch but branch a
+little further down" effect:
+
+```c
+	/*
+	 * Encode the results before passing thru door.
+	 */
+	rbsz = xdr_sizeof(xdr_nfsauth_res, &res);
+	if (rbsz == 0)
+		goto failed;
+	rbuf = alloca(rbsz);
+
+	xdrmem_create(&xdrs_r, rbuf, rbsz, XDR_ENCODE);
+	if (!xdr_nfsauth_res(&xdrs_r, &res)) {
+		xdr_destroy(&xdrs_r);
+failed:
+		xdr_free(xdr_nfsauth_res, (char *)&res);
+		/*
+		 * return only the status code
+		 */
+		res.stat = NFSAUTH_DR_EFAIL;
+		rbsz = sizeof (uint_t);
+		rbuf = (caddr_t)&res.stat;
+
+		goto out;
+	}
+	xdr_destroy(&xdrs_r);
+	xdr_free(xdr_nfsauth_res, (char *)&res);
+
+out:
+	(void) door_return((char *)rbuf, rbsz, NULL, 0);
+	(void) door_return(NULL, 0, NULL, 0);
+	/* NOTREACHED */
+```
