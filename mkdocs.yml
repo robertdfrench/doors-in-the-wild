@@ -19,6 +19,7 @@ nav:
     - fmd: fmd.md
     - ikeadm: ikeadm.md
     - ipmgmt: ipmgmt.md
+    - mountd: mountd.md
     - nwamd: nwamd.md
     - syseventd: sysevent.md
     - wpad: wpa_supplicant.md
