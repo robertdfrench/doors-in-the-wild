@@ -4,7 +4,7 @@
 * [`usr/src/cmd/fs.d/nfs/mountd/mountd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/mountd/mountd.c)
 * [`usr/src/cmd/fs.d/nfs/mountd/mountd.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/mountd/mountd.h)
 * [`usr/src/cmd/fs.d/nfs/mountd/nfs_cmd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/mountd/nfs_cmd.c)
-* .Pa usr/src/cmd/fs.d/nfs/mountd/nfsauth.c
+* [`usr/src/cmd/fs.d/nfs/mountd/nfsauth.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/mountd/nfsauth.c)
 
 
 The `_nfssys` call can be used to pass door descriptors into the kernel (likely
