@@ -23,3 +23,7 @@ arguments to two different types: `refd_door_args_t` and `mapid_arg`. As a
 between group names and ids or user names and ids. Only in one case does
 the server use the `refd_door_args_t` form of the payload, this in order to
 serve some kind of network statistics.
+
+So this is an example of both a [Switching Table](switching_table.md) and
+[Payload Polymorphism](payload_polymorphism.md) (though for the latter, not in
+the usual sense).
