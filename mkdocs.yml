@@ -3,7 +3,7 @@ theme: readthedocs
 nav:
   - Home: README.md
   - Tradecraft:
-    - Access Conrol: dbac.md
+    - Access Control: dbac.md
     - Door Return Failure: door_return_failure.md
     - Linting: linting.md
     - Payload Polymorphism: payload_polymorphism.md
@@ -18,7 +18,7 @@ nav:
     - drd: drd.md
     - fmd: fmd.md
     - ikeadm: ikeadm.md
-    - ipmgmt: ipmgmt.md
+    - ipmgmtd: ipmgmtd.md
     - mountd: mountd.md
     - nfsmapid: nfsmapid.md
     - nwamd: nwamd.md

@@ -1,4 +1,4 @@
-# ipmgmt
+# ipmgmtd
 
 * [`usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_door.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_door.c)
 * [`usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/cmd-inet/lib/ipmgmtd/ipmgmt_impl.h)

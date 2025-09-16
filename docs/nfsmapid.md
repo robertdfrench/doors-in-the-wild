@@ -2,6 +2,7 @@
 *NFS user and group id mapping daemon*
 
 * [`usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_server.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_server.c)
+* [`usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_test.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_test.c)
 
 ```c
 /*
@@ -84,4 +85,65 @@ send_response:
 	}
 
 	door_return(res, res_size, NULL, 0);
+```
+
+
+## Tests
+The `nfsmapid_test.c` file contains tests which actually place door calls. This
+does not seem to be a common pattern.
+
+Instead of using a global [Static File Descriptor](static_file_descriptor.md)
+for the door, the function `nfs_idmap_doorget()` declares a local static
+descriptor; this function will attempt to open the door if one has not already
+been opened, but otherwise return the opened doorfd:
+
+```c
+int
+nfs_idmap_doorget()
+{
+	static int doorfd = -1;
+
+	if (doorfd != -1)
+		return (doorfd);
+
+	if ((doorfd = open(NFSMAPID_DOOR, O_RDWR)) == -1) {
+		perror(NFSMAPID_DOOR);
+		exit(1);
+	}
+	return (doorfd);
+}
+```
+
+This function will exit rather than returning `-1`. However, all callers check
+for this return value anyhow:
+
+```c
+    /* from nfs_idmap_uid_str() */
+	if ((doorfd = nfs_idmap_doorget()) == -1) {
+        fprintf(stderr, "nfs_idmap_uid_str: Can't "
+            "communicate with mapping daemon nfsmapid\n");
+	}
+```
+
+
+### Unmapping `rbuf`
+All the tests unmap the returned buffer *iff* the returned buffer has a
+different address than the buffer provided to the `door_call`:
+
+```c
+out:
+	if (resp != mapresp)
+		munmap(door_args.rbuf, door_args.rsize);
+	return (error);
+```
+
+### Anticipating `door_call` failure
+This code anticipates that `door_call` itself will fail, rather than the door
+server returning an error. This is good defense against the server dying, but it
+does not seem to be used all over the place:
+
+```c
+	if (door_call(doorfd, &door_args) == -1) {
+		perror("door_call failed");
+	}
 ```
