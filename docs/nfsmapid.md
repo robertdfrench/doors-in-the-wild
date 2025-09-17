@@ -3,6 +3,7 @@
 
 * [`usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_server.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_server.c)
 * [`usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_test.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_test.c)
+* .Pa usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid.c
 
 ```c
 /*
@@ -147,3 +148,34 @@ does not seem to be used all over the place:
 		perror("door_call failed");
 	}
 ```
+
+
+## Application Setup
+There is an attempt to create a door "jamb" with an extremely specific set of
+permissions, but door calls don't really honor these...
+
+```c
+	/*
+	 * Create a file system path for the door
+	 */
+	if ((dfd = open(NFSMAPID_DOOR, O_RDWR|O_CREAT|O_TRUNC,
+				S_IRUSR|S_IWUSR|S_IRGRP|S_IROTH)) == -1) {
+		syslog(LOG_ERR, "Unable to open %s: %m\n", NFSMAPID_DOOR);
+		(void) close(doorfd);
+		return (1);
+	}
+```
+
+The door for this application is created with `DOOR_NO_CANCEL`. Interestingly,
+the `door_create` call is treated as fallible:
+
+```c
+	if ((doorfd = door_create(nfsmapid_func, NULL,
+	    DOOR_REFUSE_DESC | DOOR_NO_CANCEL)) == -1) {
+		syslog(LOG_ERR, "Unable to create door: %m\n");
+		return (1);
+	}
+```
+
+Why would that fail? Does the system have an upper bound on the number of file
+descriptors it's willing to issue?
