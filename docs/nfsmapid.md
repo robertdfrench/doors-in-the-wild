@@ -3,7 +3,7 @@
 
 * [`usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_server.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_server.c)
 * [`usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_test.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid_test.c)
-* .Pa usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid.c
+* [`usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/nfs/nfsmapid/nfsmapid.c)
 
 ```c
 /*
