@@ -22,6 +22,7 @@ nav:
     - mountd: mountd.md
     - nfsmapid: nfsmapid.md
     - nwamd: nwamd.md
+    - reparsed: reparsed.md
     - syseventd: sysevent.md
     - wpad: wpa_supplicant.md
   - Miscellany:
