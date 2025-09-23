@@ -24,3 +24,6 @@ door to a text file, or vice versa.
 
 * [`usr/src/cmd/find/find.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/find/find.c)
 `find(1)` must be able to determine whether a file is a door. 
+
+* [`usr/src/man/man1/find.1`](https://github.com/illumos/illumos-gate/blob/master/usr/src/man/man1/find.1)
+Same as above
