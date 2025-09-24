@@ -1,4 +1,35 @@
-# SMB Development Tool
+# [`SMBIOD(8)`](https://illumos.org/man/8/smbiod)
+*SMB Client I/O Daemon*
+
+
+## SMBFS I/O Daemon
+* [`usr/src/cmd/fs.d/smbclnt/smbiod-svc/smbiod-svc.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/smbclnt/smbiod-svc/smbiod-svc.c)
+
+static string to hold the path of the door jamb even though it is defined as a
+macro elsewhere:
+
+```c
+static const char door_path[] = SMBIOD_SVC_DOOR;
+```
+
+Server procedure `svc_dispatch` allows a null argument (see the [Liveness
+Check](liveness_check.md) pattern).
+
+```c
+void
+svc_dispatch(void *cookie, char *argp, size_t argsz,
+    door_desc_t *dp, uint_t n_desc)
+{
+	if (argp == NULL) {
+        int32_t rc = 0;
+        door_return((void *)&rc, sizeof (rc), NULL, 0);
+	}
+
+    /* ... actual code ... */
+}
+```
+
+## SMB Development Tool
 * [`usr/src/cmd/fs.d/smbclnt/fksmbcl/fkiod_cl.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/smbclnt/fksmbcl/fkiod_cl.c)
 * [`usr/src/cmd/fs.d/smbclnt/fksmbcl/fknewvc.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/smbclnt/fksmbcl/fknewvc.c)
 

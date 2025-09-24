@@ -6,6 +6,7 @@ nav:
     - Access Control: dbac.md
     - Door Return Failure: door_return_failure.md
     - Linting: linting.md
+    - Liveness Check: liveness_check.md
     - Payload Polymorphism: payload_polymorphism.md
     - Static File Descriptors: static_file_descriptor.md
     - Switching Tables: switching_table.md
@@ -16,7 +17,6 @@ nav:
     - devfsadm: devfsadm.md
     - dlmgmtd: dlmgmtd.md
     - drd: drd.md
-    - fksmbcl: fksmbcl.md
     - fmd: fmd.md
     - ikeadm: ikeadm.md
     - ipmgmtd: ipmgmtd.md
@@ -24,6 +24,7 @@ nav:
     - nfsmapid: nfsmapid.md
     - nwamd: nwamd.md
     - reparsed: reparsed.md
+    - smbiod: smbiod.md
     - syseventd: sysevent.md
     - wpad: wpa_supplicant.md
   - Miscellany:
