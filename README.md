@@ -1,5 +1,5 @@
 # Doors in the Wild
-*A nice and accurate survey of every door in illumos-gate*
+*A nice and accurate survey of doors in illumos-gate*
 
 ```progress
 8.95% Complete
