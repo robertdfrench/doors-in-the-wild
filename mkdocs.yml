@@ -8,6 +8,7 @@ nav:
     - Linting: linting.md
     - Liveness Check: liveness_check.md
     - Payload Polymorphism: payload_polymorphism.md
+    - Preventing Thread Cancellation: thread_cancellation.md
     - Static File Descriptors: static_file_descriptor.md
     - Switching Tables: switching_table.md
   - Sightings:
