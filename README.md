@@ -2,7 +2,7 @@
 *A nice and accurate survey of doors in illumos-gate*
 
 ```progress
-8.95% Complete
+9.06% Complete
 ```
 
 The **Tradecraft** section describes common door techniques

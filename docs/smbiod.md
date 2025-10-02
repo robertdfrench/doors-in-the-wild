@@ -4,6 +4,7 @@
 
 ## SMBFS I/O Daemon
 * [`usr/src/cmd/fs.d/smbclnt/smbiod-svc/smbiod-svc.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/smbclnt/smbiod-svc/smbiod-svc.c)
+* [`usr/src/cmd/fs.d/smbclnt/smbiod/smbiod.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/fs.d/smbclnt/smbiod/smbiod.c)
 
 static string to hold the path of the door jamb even though it is defined as a
 macro elsewhere:
@@ -27,6 +28,23 @@ svc_dispatch(void *cookie, char *argp, size_t argsz,
 
     /* ... actual code ... */
 }
+```
+
+A liveness check can also determine whether a door server is already running, to
+prevent a second instance of the server from (attempting to) clobber the jamb:
+
+```c
+	/*
+	 * If a user runs this command (i.e. by accident)
+	 * don't interfere with any already running IOD.
+	 */
+	err = smb_iod_open_door(&door_fd);
+	if (err == 0) {
+		close(door_fd);
+		door_fd = -1;
+		DPRINT("%s: already running\n", argv[0]);
+		exit(SMF_EXIT_OK);
+	}
 ```
 
 ## SMB Development Tool
