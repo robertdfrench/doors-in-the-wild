@@ -3,7 +3,12 @@
 
 *Note*: there does not seem to be a man page for `hotplugd(8)` even though it is referenced in other pages.
 
-* .Pa usr/src/cmd/hotplugd/hotplugd_door.c
+* [`usr/src/cmd/hotplugd/hotplugd_door.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/hotplugd/hotplugd_door.c)
+* [`usr/src/cmd/hotplugd/hotplugd_impl.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/hotplugd/hotplugd_impl.c)
+* [`usr/src/cmd/hotplugd/hotplugd_impl.h`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/hotplugd/hotplugd_impl.h)
+* [`usr/src/cmd/hotplugd/hotplugd.c`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/hotplugd/hotplugd.c)
+* [`usr/src/cmd/hotplugd/Makefile`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/hotplugd/Makefile)
+* [`usr/src/cmd/hotplugd/svc-hotplug`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/hotplugd/svc-hotplug)
 
 Use of [Static File Descriptor](static_file_descriptor.md) pattern. This allows the `door_server_init` function to run and create the door as follows:
 
@@ -41,3 +46,20 @@ permissions. Any user on the system could just free all the results buffers.
 If one client is using a buffer, can another client delete it out from under
 them and cause problems, or merely cause a delay while the resources are
 re-allocated?
+
+
+## SMF
+The hotplugd door path is defined in the SMF script. If a file (door or not)
+exists at the desired path, and a progress (actual hotplugd or not) is running,
+then hotplugd will not start:
+
+```sh
+# If a hotplug door exists, check for a hotplugd process and exit
+# if the daemon is already running.
+if [ -f $HOTPLUGD_DOOR ]; then
+	if /usr/bin/pgrep -x -u 0 hotplugd >/dev/null 2>&1; then
+		echo "$0: hotplugd is already running"
+		exit 1
+	fi
+fi
+```
