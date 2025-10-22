@@ -20,6 +20,7 @@ nav:
     - drd: drd.md
     - fmd: fmd.md
     - hotplugd: hotplugd.md
+    - ibd: ibd.md
     - ikeadm: ikeadm.md
     - ipmgmtd: ipmgmtd.md
     - mountd: mountd.md
