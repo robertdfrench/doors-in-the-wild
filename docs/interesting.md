@@ -26,3 +26,8 @@ seems to be in the context of serial modems.
 The `file(1)` command uses `door_info` to print information
 about the cookie and associated door server, if possible. If the
 call to `door_info` fails, it just says "door".
+
+* [`usr/src/cmd/initpkg/shutdown.sh`](https://github.com/illumos/illumos-gate/blob/master/usr/src/cmd/initpkg/shutdown.sh)
+The script for shutting down the system checks to see if SMF is
+running by checking wether its door rendezvous file (its "jamb")
+exists. No `door_call` is attempted.
